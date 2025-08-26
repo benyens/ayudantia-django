@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Registro{% endblock %}
+{% block content %}
+<h1>Crear cuenta</h1>
+<!-- Formulario de registro. method="post" para enviar datos; csrf_token protege contra CSRF -->
+<form method="post">
+  {% csrf_token %}
+  <!-- Muestra automáticamente los campos del formulario con etiquetas y errores -->
+  {{ form.as_p }}
+  <p><button class="btn" type="submit">Registrarme</button></p>
+</form>
+{% endblock %}

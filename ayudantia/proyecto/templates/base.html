@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <!-- Título que puede cambiar por página -->
+  <title>{% block title %}Ayudantía{% endblock %}</title>
+  <!-- Para que se vea bien en móviles -->
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    /* Estilos simples para que se vea ordenado sin CSS externo */
+    body{font-family:system-ui,Arial,sans-serif;max-width:840px;margin:2rem auto;padding:0 1rem;}
+    nav a{margin-right:.75rem;}
+    form p{margin:.5rem 0;}
+    .btn{display:inline-block;padding:.45rem .7rem;border:1px solid #333;text-decoration:none;}
+    .msg{padding:.5rem .75rem;border:1px solid #ddd;margin:.5rem 0;}
+  </style>
+</head>
+<body>
+  <!-- Menú superior; muestra opciones según si el usuario está logueado -->
+  <nav>
+    <a href="{% url 'proyecto:index' %}">Inicio</a>
+    {% if request.user.is_authenticated %}
+      <!-- Si está logueado -->
+      <a href="{% url 'proyecto:profile' %}">Mi perfil</a>
+      <a href="{% url 'proyecto:logout' %}">Salir</a>
+    {% else %}
+      <!-- Si NO está logueado -->
+      <a href="{% url 'proyecto:login' %}">Ingresar</a>
+      <a href="{% url 'proyecto:register' %}">Registrarme</a>
+      <a href="{% url 'proyecto:change_password' %}">Cambiar contraseña</a>
+    {% endif %}
+  </nav>
+  <hr>
+
+  <!-- Bloque que muestra mensajes flash (éxito, error, etc.) -->
+  {% if messages %}
+    {% for m in messages %}
+      <div class="msg">{{ m }}</div>
+    {% endfor %}
+  {% endif %}
+
+  <!-- Aquí cada página pone su contenido -->
+  {% block content %}{% endblock %}
+</body>
+</html>

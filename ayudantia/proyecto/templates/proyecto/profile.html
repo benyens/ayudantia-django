@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Perfil{% endblock %}
+{% block content %}
+<h1>Mi perfil</h1>
+<!-- 'usuario' viene del contexto de la vista profile -->
+<p><strong>Usuario:</strong> {{ usuario.username }}</p>
+<p><strong>Nombre:</strong> {{ usuario.first_name }} {{ usuario.last_name }}</p>
+<p><strong>Correo:</strong> {{ usuario.email }}</p>
+
+<p>
+  <a class="btn" href="{% url 'proyecto:edit_profile' %}">Editar perfil</a>
+  <a class="btn" href="{% url 'proyecto:change_password' %}">Cambiar contraseña</a>
+  <a class="btn" href="{% url 'proyecto:delete_profile' %}">Eliminar cuenta</a>
+</p>
+{% endblock %}
